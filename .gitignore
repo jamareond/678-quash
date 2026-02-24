@@ -1,0 +1,12 @@
+
+quash
+*.o
+
+*.out
+
+.DS_Store
+
+doc/html/
+
+doc/latex/
+
