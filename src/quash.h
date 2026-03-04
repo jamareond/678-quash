@@ -50,6 +50,5 @@ bool is_running();
 /**
  * @brief Causes the execution loop to end.
  */
-void end_main_loop();
-
+void end_main_loop(int exit_status);
 #endif // QUASH_H

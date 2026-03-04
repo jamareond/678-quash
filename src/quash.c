@@ -76,6 +76,7 @@ bool is_tty() {
 
 // Stop Quash from requesting more input
 void end_main_loop(int exit_status) {
+  (void) exit_status;   // silence unused parameter warning
   state.running = false;
 }
 
