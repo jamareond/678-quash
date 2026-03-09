@@ -25,7 +25,6 @@ const char* lookup_env(const char* env_var);
  * @brief Function to set and define environment variable values
  *
  * @param env_var Environment variable to set
- *
  * @param val String with the value to set the environment variable env_var
  */
 void write_env(const char* env_var, const char* val);
@@ -51,13 +50,8 @@ void check_jobs_bg_status();
 /**
  * @brief Print a job to standard out
  *
- * We use the minimum of what a Job structure should contain to pass to this
- * function.
- *
  * @param job_id Job identifier number.
- *
  * @param pid Process id of a process belonging to this job.
- *
  * @param cmd String holding an approximation of what the user typed in for the
  * command.
  */
@@ -66,13 +60,9 @@ void print_job(int job_id, pid_t pid, const char* cmd);
 /**
  * @brief Print the start up of a background job to standard out
  *
- * We use the minimum of what a Job should contain to pass to this function.
- *
  * @param job_id Job identifier number.
- *
  * @param pid Process id of a process belonging to this job.
- *
- * @param cmd String holding an aproximation of what the user typed in for the
+ * @param cmd String holding an approximation of what the user typed in for the
  * command.
  */
 void print_job_bg_start(int job_id, pid_t pid, const char* cmd);
@@ -80,13 +70,9 @@ void print_job_bg_start(int job_id, pid_t pid, const char* cmd);
 /**
  * @brief Print the completion of a background job to standard out
  *
- * We use the minimum of what a Job should contain to pass to this function.
- *
  * @param job_id Job identifier number.
- *
  * @param pid Process id of a process belonging to this job.
- *
- * @param cmd String holding an aproximation of what the user typed in for the
+ * @param cmd String holding an approximation of what the user typed in for the
  * command.
  */
 void print_job_bg_complete(int job_id, pid_t pid, const char* cmd);
@@ -94,71 +80,73 @@ void print_job_bg_complete(int job_id, pid_t pid, const char* cmd);
 /**
  * @brief Run a generic (non-builtin) command
  *
- * @param cmd A @a GenericCommand command
- *
- * @sa GenericCommand
+ * @param cmd A GenericCommand command
  */
 void run_generic(GenericCommand cmd);
 
 /**
  * @brief Run the builtin echo command
  *
- * @param cmd An @a EchoCommand
- *
- * @sa EchoCommand
+ * @param cmd An EchoCommand
  */
 void run_echo(EchoCommand cmd);
 
 /**
  * @brief Run the builtin export command
  *
- * @param cmd An @a ExportCommand
- *
- * @sa ExportCommand
+ * @param cmd An ExportCommand
  */
 void run_export(ExportCommand cmd);
 
 /**
- * @brief Run the builtin cd (change directory) command
+ * @brief Run the builtin cd command
  *
- * @param cmd An @a CDCommand
- *
- * @sa CDCommand
+ * @param cmd A CDCommand
  */
 void run_cd(CDCommand cmd);
 
 /**
  * @brief Run the builtin kill command
  *
- * @param cmd A @a KillCommand
- *
- * @sa KillCommand
+ * @param cmd A KillCommand
  */
 void run_kill(KillCommand cmd);
 
 /**
- * @brief Run the builtin pwd (print working directory) command
- *
- * @sa PWDCommand
+ * @brief Run the builtin pwd command
  */
 void run_pwd();
 
 /**
- * @brief Run the builtin jobs command to show the jobs list
- *
- * @sa PWDCommand
+ * @brief Run the builtin jobs command
  */
 void run_jobs();
 
 /**
+ * @brief Dispatch command execution for child processes
+ *
+ * @param cmd Command to run in the child
+ */
+void child_run_command(Command cmd);
+
+/**
+ * @brief Dispatch command execution for parent process
+ *
+ * @param cmd Command to run in the parent
+ */
+void parent_run_command(Command cmd);
+
+/**
+ * @brief Create one process for a command holder
+ *
+ * @param holder CommandHolder to execute
+ */
+void create_process(CommandHolder holder);
+
+/**
  * @brief Common entry point for all commands
  *
- * This function resolves the type of the command and calls the relevant run
- * function
- *
  * @param holders An array of command holders
- *
- * @sa Command
  */
 void run_script(CommandHolder* holders);
 
